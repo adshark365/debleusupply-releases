@@ -1,76 +1,94 @@
-<div align="center">
+# 🌸 Debleu Supply - Operations Control, AI Studio & Dispatch Engine
 
-# 🌸 Debleu Supply - Official Distribution Portal
-
-[![Latest Release](https://img.shields.io/github/v/release/adshark365/debleusupply-releases?color=7c3aed&label=Versi%C3%B3n%20Oficial&logo=github)](https://github.com/adshark365/debleusupply-releases/releases/latest)
-[![Version](https://img.shields.io/badge/Versi%C3%B3n%20Actual-v1.0.3-emerald)](https://github.com/adshark365/debleusupply-releases/releases/latest)
-[![Platform](https://img.shields.io/badge/Plataforma-Windows%2010%20%7C%2011%20(64--bit)-0078D6?logo=windows)](https://github.com/adshark365/debleusupply-releases/releases/latest)
-[![Auto-Updater](https://img.shields.io/badge/Auto--Updater-Multi--Espejo%20Activo-10B981?logo=electron)](https://github.com/adshark365/debleusupply-releases/releases/latest)
-
-<p align="center">
-  <b>Terminal de Operaciones, Sincronización Omnicanal de Inventario, Picking Móvil, Wi-Fi CRM y Gestión de Tienda</b>
-</p>
-
-[📥 Descargar Última Versión (v1.0.3)](https://github.com/adshark365/debleusupply-releases/releases/latest) •
-[📋 Todas las Versiones](https://github.com/adshark365/debleusupply-releases/releases) •
-[❓ Guía de Instalación](#-gu%C3%ADa-de-instalaci%C3%B3n-y-primer-uso)
+> **Versión Oficial:** `v1.0.6`  
+> **Plataforma:** Windows Desktop (Electron x64) + Web Apps Móviles  
+> **Comercio:** Debleu Supply - Grand Cayman 🇰🇾  
+> **Repositorio:** [github.com/adshark365/debleusupply](https://github.com/adshark365/debleusupply)
 
 ---
 
-</div>
+## 📋 Resumen Ejecutivo del Sistema
 
-## 📌 Acerca de este Repositorio
-Este es el **Repositorio Espejo Oficial de Distribución y Actualizaciones** de **Debleu Supply**.  
-Aquí se publican exclusivamente los paquetes ejecutables terminados, firmas de integridad y manifiestos de actualización automática en segundo plano para las terminales de operación autorizadas.
+**Debleu Supply Operations** es la plataforma integral de control de inventario, alistamiento en bodega (picking), despacho de última milla con rastreo en vivo y estudio fotográfico cosmético impulsado por Inteligencia Artificial (Google Gemini).
+
+El sistema opera bajo una arquitectura de **Computadora Madre (Servidor Central Express + SQLite)** y expone 5 portales especializados mediante túneles seguros de Cloudflare:
+
+1. **`admin.debleusupply.ky`**: Panel Maestro de Operaciones (Kanban, RetailEdge POS sync, WooCommerce, gestión de choferes y cuotas).
+2. **`picking.debleusupply.ky`**: Interfaz móvil táctil para bodegueros y alistamiento con escáner de código de barras.
+3. **`studio.debleusupply.ky`**: Estudio fotográfico móvil (3 fotos: código, frontal e ingredientes) con Gemini Vision y respaldo en Google Drive.
+4. **`delivery.debleusupply.ky`**: Portal para conductores con geolocalización GPS automática, vibración háptica y captura de firma digital.
+5. **`tracking.debleusupply.ky`**: Seguimiento interactivo en vivo para el cliente final con mapa Leaflet + OpenStreetMap y protección por huella de dispositivo (HWID).
 
 ---
 
-## 📦 Enlaces de Descarga Directa (Versión 1.0.3)
+## 🚀 Novedades y Características de la Versión 1.0.6
 
-Seleccione el tipo de descarga según sus necesidades:
+### 1. 🛡️ Vinculación Silenciosa de Dispositivo (HWID Fingerprint)
+- **Cero Fricción para el Cliente:** Al pulsar por primera vez el enlace de WhatsApp (`https://tracking.debleusupply.ky/order/1052`), el navegador del comprador calcula silenciosamente una huella digital única del hardware/navegador mediante `device_hwid.js`.
+- **Barrera de Privacidad y Anti-Espionaje:** Si el enlace es reenviado a un tercero o abierto desde otro equipo no autorizado, el sistema responde con **HTTP 403 Forbidden** y bloquea la visualización de la dirección particular, teléfono, contenido de la compra y firma de entrega.
+- **Control para el Administrador:** Desde el panel de la Computadora Madre, el operador puede ver el dispositivo emparejado (ej. `📱 iPhone • Safari`) y dispone del botón **`[🔓 Desvincular Dispositivo]`** para liberar la orden si el cliente cambió legítimamente de teléfono.
 
-| Tipo | Archivo de Descarga Directa | Recomendado para |
+### 2. 🗺️ Rastreo en Vivo 100% Gratuito (Leaflet + OpenStreetMap)
+- **Cero Facturación de Google Maps API:** Toda la cartografía opera con capas abiertas de OpenStreetMap y marcadores interactivos en Leaflet.
+- **Ping Interactivo de Ubicación:**
+  - El cliente cuenta con el botón *"¿Dónde viene mi pedido?"*, el cual hace vibrar el teléfono del repartidor y solicita actualización de GPS con una regla de enfriamiento (*cooldown*) de 10 minutos para no distraerlo en ruta.
+  - El Administrador en bodega puede solicitar la ubicación al repartidor en cualquier momento sin límites de tiempo.
+
+### 3. ☁️ Google Drive Multi-Comercio y Almacenamiento en Computadora Madre
+- **Carpetas Dinámicas por Número de Negocio:** El Google Drive maestro organiza automáticamente los clientes en subcarpetas con su nombre y número (`/[Nombre]_[NumeroNegocio]/`), permitiendo que múltiples sucursales o clientes compartan la misma cuenta sin colisiones.
+- **Persistencia en Computadora Madre:** Las 3 fotos crudas (`01_barcode.jpg`, `02_frontal.jpg`, `03_etiqueta.jpg`) se guardan permanentemente en el disco duro físico de la computadora madre antes de ser transmitidas a Google Drive.
+- **Bloqueo Selectivo por Cuota:** La cuenta raíz de Google Drive nunca se desconecta ni se purga; únicamente se pausa la subida a la carpeta del comercio cuando su cuota contratada llega a 0 productos.
+
+### 4. 💎 Planes Comerciales de Recarga y Alertas por Webhook
+- **Paquetes Oficiales:**
+  - **100 Fotos:** $80 USD
+  - **200 Fotos:** $150 USD *(Ahorras $10 USD)*
+  - **300 Fotos:** $200 USD *(Ahorras $40 USD)*
+- **Notificación Directa al Creador:** Al agotarse la cuota o al solicitar un paquete desde el teléfono o el dashboard, se dispara un Webhook automático (correo/Discord/Formspree) con los datos del pedido para enviar la nueva API Key.
+- **Pop-up Festivo de Activación:** Al ingresar la nueva clave, se despliega una ventana modal con animación de confeti y desglose de la nueva cuota.
+
+### 5. 💬 Despacho Obligatorio por WhatsApp
+- Para iniciar el alistamiento de una orden en bodega, el botón queda bloqueado con candado hasta que el operario pulse *"💬 Abrir WhatsApp Web con Link de Tracking"*, garantizando que todo comprador reciba su enlace de seguimiento en tiempo y forma.
+
+### 6. 👑 Modo Administrador & Switch Operador (PIN Maestro `9999`)
+- **Apertura Directa Sin Bloqueos Invasivos:** La aplicación arranca de inmediato en **Modo Operador** mostrando lo esencial para el equipo de tienda: tablero Kanban, alistamiento de pedidos, directorio de personal, domiciliarios, reportes y trazabilidad en vivo, sin pantallas que impidan la visualización.
+- **Switch de Modo en Barra Superior:** Botón interactivo en la cabecera que permite alternar fácilmente entre `👤 Modo Operador` (operaciones diarias y lectura) y `👑 Modo Administrador` (control y edición total).
+- **Acciones Protegidas por PIN:** Únicamente en Modo Administrador se permite agregar, editar o eliminar personal, agregar o eliminar domiciliarios, desvincular dispositivos HWID, descartar órdenes, crear roles, configurar módulos o cambiar credenciales de API.
+- **PIN por Defecto:** El PIN inicial maestro de fábrica es **`9999`**.
+- **Recuperación Segura por Correo:** Si el administrador olvida el PIN, cuenta con la opción *"¿Olvidaste tu PIN?"*, la cual envía un código OTP de seguridad de 6 dígitos al correo de recuperación registrado (`admin@debleusupply.ky` por defecto, personalizable) con vigencia de 15 minutos para restablecer el PIN de inmediato.
+- **Gestión y Activación de Módulos:** Pestaña dedicada para encender o pausar módulos según la operativa (Picking, AI Studio, Despacho, Live Tracking, Portal WiFi, WooCommerce, RetailEdge POS).
+- **Creador de Roles Dinámicos:** Permite crear nuevos perfiles de usuario con permisos personalizados (`can_add`, `can_edit`, `can_delete`, `can_config`), los cuales se reflejan automáticamente en el formulario de alta de personal.
+
+---
+
+## 📦 Archivos de Distribución (Compilados en `dist-release/` y `dist/`)
+
+| Archivo | Tipo | Descripción |
 | :--- | :--- | :--- |
-| ⭐ **Instalador Oficial (Recomendado)** | [**`Debleu.Supply.Setup.1.0.3.exe`**](https://github.com/adshark365/debleusupply-releases/releases/latest/download/Debleu.Supply.Setup.1.0.3.exe) | **Instalación estándar en la PC Principal.** Instala el programa en el sistema y habilita el botón de **actualizaciones automáticas en segundo plano**. |
-| 🛡️ **Paquete Comprimido (ZIP)** | [**`Debleu.Supply-1.0.3-win.zip`**](https://github.com/adshark365/debleusupply-releases/releases/latest/download/Debleu.Supply-1.0.3-win.zip) | Ideal para enviar por correo electrónico o WhatsApp. Descomprima y ejecute para evitar alertas de antivirus. |
-| 🔌 **Ejecutable Portable** | [**`Debleu.Supply.Portable.1.0.3.exe`**](https://github.com/adshark365/debleusupply-releases/releases/latest/download/Debleu.Supply.Portable.1.0.3.exe) | Uso inmediato sin instalación previa. Ideal para memorias USB o terminales secundarias. |
-
-> 👉 Para ver la página oficial de la versión con el changelog completo, visite [**Releases Oficiales v1.0.3**](https://github.com/adshark365/debleusupply-releases/releases/latest).
-
----
-
-## 🚀 Novedades y Capacidades en la Versión 1.0.3
-
-* 🛒 **Sincronización Bidireccional Activa con WooCommerce:**
-  * Detección automática en tiempo real de nuevos pedidos web cada 20 segundos (sin requerir webhooks ni configuración de puertos).
-  * Soporte completo para pedidos enviados por WhatsApp y Pago Contra Entrega (COD).
-  * Al cambiar el estado de un pedido en el Kanban (Listo, Despachado, Cancelado, Devolución), el estado se actualiza automáticamente en la tienda online.
-* 🗑️ **Descarte y Eliminación de Pedidos:** Botón para eliminar órdenes de prueba tanto localmente como en la papelera de WooCommerce, garantizando que nunca más vuelvan a importarse.
-* 📶 **Portal Cautivo Wi-Fi con Captura de Leads:**
-  * Formulario de registro con indicativo de **Islas Caimán (`🇰🇾 +1 345`)** por defecto y opciones internacionales.
-  * Acceso temporal de cortesía por **1 minuto** mientras el cliente verifica su correo con un código PIN de 6 dígitos.
-  * Al validar el código, se desbloquean los 30 min / 1 hora de conexión y se entrega el cupón promocional de tienda.
-* 👥 **Módulo Wi-Fi CRM & Métricas de Clientes:**
-  * Métricas en tiempo real: Total de clientes capturados, tasa de verificación, clientes locales vs. turistas.
-  * Exportación de la base de datos de clientes a **Excel (CSV)**.
-  * Botón directo de **WhatsApp** por cliente con plantilla promocional personalizada.
-  * Aprobación rápida desde mostrador para clientes sin datos móviles.
-* 🛡️ **Protección de Base de Datos:** Los clientes, pedidos e historial quedan almacenados de forma persistente y no se borran al actualizar la aplicación.
+| **`Debleu Supply Setup 1.0.6.exe`** | Instalador NSIS | Instalador ejecutable estándar para Windows 10/11 con auto-actualizador. |
+| **`Debleu Supply Setup 1.0.6.exe.blockmap`** | Blockmap | Mapa de bloques binarios para descargas diferenciales ultrarrápidas de electron-updater. |
+| **`Debleu Supply Portable 1.0.6.exe`** | Ejecutable Portable | Versión lista para usar sin necesidad de privilegios de administrador ni instalación. |
+| **`Debleu Supply-1.0.6-win.zip`** | Archivo Comprimido | Binarios completos portables empaquetados en formato ZIP. |
+| **`latest.yml`** | Manifiesto de Versión | Archivo de metadatos SHA-512 y tamaño para el canal de actualización oficial de instaladores. |
+| **`version.json`** | Manifiesto Enriquecido | Metadatos para auto-actualización de versiones portables, notas de lanzamiento y respaldo multi-espejo. |
 
 ---
 
-## 🛠️ Guía de Instalación y Primer Uso
+## 🛠️ Instrucciones de Ejecución y Desarrollo
 
-### 1. Instalación Estándar (Recomendada)
-1. Descargue el archivo [**`Debleu.Supply.Setup.1.0.3.exe`**](https://github.com/adshark365/debleusupply-releases/releases/latest/download/Debleu.Supply.Setup.1.0.3.exe).
-2. Haga doble clic para iniciar el instalador.
-3. El programa creará automáticamente el acceso directo en el Escritorio y en el Menú Inicio.
+### Requisitos Previos
+- **Sistema Operativo:** Windows 10 o Windows 11 (64 bits)
+- **Node.js:** Versión 18 o superior
+- **Git** configurado
 
-### 2. Aviso de Windows SmartScreen (Primera Ejecución)
-Al ser una aplicación empresarial propietaria sin firma de certificado comercial público de Microsoft, es normal que Windows muestre una advertencia de protección:
+### Puesta en Marcha Local
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/adshark365/debleusupply.git
+cd debleusupply
 
-```text
-╔════════════════════════════════════════════════════════════════╗
-║  Windows protegió su PC (SmartScreen)                          ║
-║  Windows Defender evitó el inicio de una aplicación...         ║
-╚════════════════════════════════════════════════════════════════╝
+# 2. Instalar dependencias
+npm install
+
+# 3. Iniciar la aplicación en modo desarrollo (Desktop Electron + Servidor Express)
+npm start
